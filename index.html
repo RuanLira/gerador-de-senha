@@ -9,6 +9,8 @@
 <body>
   <main class="app">
     <section class="panel" aria-labelledby="app-title">
+      <button id="themeButton" class="theme-button" type="button" aria-label="Alternar tema">Tema escuro</button>
+
       <div class="heading">
         <p class="eyebrow">Seguranca digital</p>
         <h1 id="app-title">Gerador de senha</h1>
@@ -52,9 +54,27 @@
         </label>
       </fieldset>
 
+      <div class="strength" aria-live="polite">
+        <div class="strength-header">
+          <span>Forca da senha</span>
+          <strong id="strengthText">Forte</strong>
+        </div>
+        <div class="strength-track" aria-hidden="true">
+          <div id="strengthBar" class="strength-bar"></div>
+        </div>
+      </div>
+
       <button id="generateButton" class="primary-button" type="button">Gerar senha</button>
 
       <p id="message" class="message" role="status" aria-live="polite"></p>
+
+      <section class="history" aria-labelledby="history-title">
+        <div class="history-header">
+          <h2 id="history-title">Historico</h2>
+          <button id="clearHistoryButton" type="button">Limpar</button>
+        </div>
+        <ul id="historyList"></ul>
+      </section>
     </section>
   </main>
 
