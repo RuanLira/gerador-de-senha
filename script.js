@@ -24,6 +24,7 @@ const characters = {
   symbols: "!@#$%&*_-+=?",
 };
 
+const themeStorageKey = "preferredTheme";
 let passwordHistory = [];
 
 function showMessage(text, isError = false) {
@@ -94,12 +95,15 @@ function renderHistory() {
   passwordHistory.forEach((password, index) => {
     const item = document.createElement("li");
     const passwordCode = document.createElement("code");
-    const label = document.createElement("span");
+    const copyHistoryButton = document.createElement("button");
 
     passwordCode.textContent = password;
-    label.textContent = `#${index + 1}`;
+    copyHistoryButton.className = "history-copy-button";
+    copyHistoryButton.type = "button";
+    copyHistoryButton.dataset.password = password;
+    copyHistoryButton.textContent = `Copiar #${index + 1}`;
 
-    item.append(passwordCode, label);
+    item.append(passwordCode, copyHistoryButton);
     historyList.appendChild(item);
   });
 }
@@ -107,6 +111,19 @@ function renderHistory() {
 function addToHistory(password) {
   passwordHistory = [password, ...passwordHistory].slice(0, 5);
   renderHistory();
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const temporaryInput = document.createElement("input");
+    temporaryInput.value = text;
+    document.body.appendChild(temporaryInput);
+    temporaryInput.select();
+    document.execCommand("copy");
+    temporaryInput.remove();
+  }
 }
 
 function generatePassword() {
@@ -148,14 +165,14 @@ async function copyPassword() {
     return;
   }
 
-  try {
-    await navigator.clipboard.writeText(password);
-    showMessage("Senha copiada para a area de transferencia.");
-  } catch {
-    passwordInput.select();
-    document.execCommand("copy");
-    showMessage("Senha copiada.");
-  }
+  await copyText(password);
+  showMessage("Senha copiada para a area de transferencia.");
+}
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.classList.toggle("dark", isDark);
+  themeButton.textContent = isDark ? "Tema claro" : "Tema escuro";
 }
 
 lengthInput.addEventListener("input", () => {
@@ -172,10 +189,18 @@ clearHistoryButton.addEventListener("click", () => {
 });
 
 themeButton.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  const isDark = document.body.classList.contains("dark");
-  themeButton.textContent = isDark ? "Tema claro" : "Tema escuro";
+  const newTheme = document.body.classList.contains("dark") ? "light" : "dark";
+  applyTheme(newTheme);
+  localStorage.setItem(themeStorageKey, newTheme);
 });
 
+historyList.addEventListener("click", async (event) => {
+  if (!event.target.classList.contains("history-copy-button")) return;
+
+  await copyText(event.target.dataset.password);
+  showMessage("Senha do historico copiada.");
+});
+
+applyTheme(localStorage.getItem(themeStorageKey) || "light");
 renderHistory();
 generatePassword();

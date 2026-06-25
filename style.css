@@ -282,6 +282,7 @@ h1 {
 
 #historyList li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 10px 12px;
@@ -295,6 +296,16 @@ h1 {
 #historyList code {
   overflow-wrap: anywhere;
   color: var(--text);
+}
+
+.history-copy-button {
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 7px 10px;
 }
 
 @media (max-width: 420px) {

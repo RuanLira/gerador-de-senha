@@ -13,6 +13,8 @@ Um gerador de senhas simples feito com HTML, CSS e JavaScript. O projeto foi cri
 - Ver indicador de forca da senha
 - Alternar entre tema claro e escuro
 - Ver historico temporario das ultimas senhas geradas
+- Copiar senhas direto do historico
+- Salvar preferencia de tema no navegador
 - Layout responsivo
 
 ## Tecnologias
@@ -27,7 +29,6 @@ Abra o arquivo `index.html` no navegador ou acesse a versao publicada pelo GitHu
 
 ## Proximas melhorias
 
-- Salvar preferencia de tema no navegador
-- Adicionar botao para copiar senhas do historico
 - Criar testes automatizados para a logica de geracao
 - Melhorar o indicador de forca com criterios mais completos
+- Adicionar opcao para esconder ou mostrar a senha gerada
