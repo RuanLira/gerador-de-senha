@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Senha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="panel" aria-labelledby="app-title">
+      <div class="heading">
+        <p class="eyebrow">Seguranca digital</p>
+        <h1 id="app-title">Gerador de senha</h1>
+        <p>Crie senhas fortes com tamanho e tipos de caracteres personalizados.</p>
+      </div>
+
+      <div class="password-box">
+        <input id="password" type="text" value="Clique em gerar" readonly aria-label="Senha gerada">
+        <button id="copyButton" type="button">Copiar</button>
+      </div>
+
+      <div class="control">
+        <div class="control-header">
+          <label for="length">Tamanho</label>
+          <span id="lengthValue">16</span>
+        </div>
+        <input id="length" type="range" min="6" max="32" value="16">
+      </div>
+
+      <fieldset class="options">
+        <legend>Incluir caracteres</legend>
+
+        <label class="option">
+          <input id="uppercase" type="checkbox" checked>
+          Letras maiusculas
+        </label>
+
+        <label class="option">
+          <input id="lowercase" type="checkbox" checked>
+          Letras minusculas
+        </label>
+
+        <label class="option">
+          <input id="numbers" type="checkbox" checked>
+          Numeros
+        </label>
+
+        <label class="option">
+          <input id="symbols" type="checkbox" checked>
+          Simbolos
+        </label>
+      </fieldset>
+
+      <button id="generateButton" class="primary-button" type="button">Gerar senha</button>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
